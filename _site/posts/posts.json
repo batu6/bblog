@@ -15,5 +15,22 @@
     "preview": {},
     "last_modified": "2021-11-07T19:31:45+01:00",
     "input_file": {}
+  },
+  {
+    "path": "posts/2021-11-07-post/",
+    "title": "post",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Nora Jones",
+        "url": "https://example.com/norajones"
+      }
+    ],
+    "date": "2021-11-07",
+    "categories": [],
+    "contents": "\r\nheheehhe\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/2021-11-07-post/post_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2021-11-07T19:59:25+01:00",
+    "input_file": "post.knit.md"
   }
 ]

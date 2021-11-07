@@ -1,0 +1,22 @@
+---
+title: "post"
+description: |
+  A short description of the post.
+author:
+  - name: Nora Jones
+    url: https://example.com/norajones
+date: 2021-11-07
+output:
+  distill::distill_article:
+    self_contained: false
+---
+heheehhe
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+plot(1:10)
+```
+
