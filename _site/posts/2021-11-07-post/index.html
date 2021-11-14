@@ -2071,50 +2071,34 @@ document.addEventListener('DOMContentLoaded', function() {
   <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 7.0.4.2 (Linux)"/>
-	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="00:00:00"/>
-	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
-		pre { font-family: "Liberation Mono", monospace; font-size: 10pt; background: transparent }
-	</style>
-</head>
-<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre> &lt;script&gt;
-   document.addEventListener(&quot;DOMContentLoaded&quot;, function () {
+ <script>
+   document.addEventListener("DOMContentLoaded", function () {
      if (!/posts/.test(location.pathname)) {
        return;
      }
 
-     var script = document.createElement(&quot;script&quot;);
-     script.src = &quot;https://utteranc.es/client.js&quot;;
-     script.setAttribute(&quot;repo&quot;, &quot;batu6/bblog&quot;);
-     script.setAttribute(&quot;issue-term&quot;, &quot;title&quot;);
-     script.setAttribute(&quot;crossorigin&quot;, &quot;anonymous&quot;);
-     script.setAttribute(&quot;label&quot;, &quot;comments&quot;);
-     script.setAttribute(&quot;theme&quot;, &quot;github-light&quot;);
+     var script = document.createElement("script");
+     script.src = "https://utteranc.es/client.js";
+     script.setAttribute("repo", "batu6/bblog");
+     script.setAttribute("issue-term", "title");
+     script.setAttribute("crossorigin", "anonymous");
+     script.setAttribute("label", "comments");
+     script.setAttribute("theme", "github-light");
 
      /* wait for article to load, append script to article element */
      var observer = new MutationObserver(function (mutations, observer) {
-       var article = document.querySelector(&quot;d-article&quot;);
+       var article = document.querySelector("d-article");
        if (article) {
          observer.disconnect();
          /* HACK: article scroll */
-         article.setAttribute(&quot;style&quot;, &quot;overflow-y: hidden&quot;);
+         article.setAttribute("style", "overflow-y: hidden");
          article.appendChild(script);
        }
      });
 
      observer.observe(document.body, { childList: true });
    });
- &lt;/script&gt;</pre>
-</body>
-</html>
+ </script>
 <!--/radix_placeholder_site_in_header-->
 
 
