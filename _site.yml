@@ -12,6 +12,8 @@ navbar:
 base_url: https://bstats.netlify.app/
 collections:
   posts:
-    disqus: bbstats
-    share: [twitter, linkedin]
+    disqus:
+      shortname: bbstats
+      hidden: true
+      share: [twitter, linkedin]
 output: distill::distill_article
