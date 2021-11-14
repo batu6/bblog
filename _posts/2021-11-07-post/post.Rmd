@@ -1,14 +1,15 @@
 ---
-title: "post"
+title: "Random Variables"
 description: |
   A short description of the post.
 author:
-  - name: Nora Jones
-    url: https://example.com/norajones
+  - name: Batuhan Akçabozan
 date: 2021-11-07
 output:
   distill::distill_article:
     self_contained: false
+editor_options: 
+  chunk_output_type: console
 ---
 heheehhe
 
@@ -17,6 +18,88 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ```{r}
-plot(1:10)
+library(tidyverse)
+```
+
+
+```{r}
+set.seed(1)
+
+cond <- rep(c("control", "treatment"), each = 12)
+
+cont <- round(runif(12, min=15, max=20) , 2)
+treat <- round(runif(12, min=20, max=25) , 2)
+
+dataweight <- data.frame(condition = cond, weight = c(cont, treat))
+```
+
+
+Let's imagine we measured weight of 12 mice. Half treated with a special diet (treatment), other half with usual diet (control). We want to know whether this different diet has an effect on mouse weight or not.
+```{r}
+m <- dataweight %>%
+  group_by(condition) %>%
+  slice(1:6)
+
+m
+
+mMean <- m %>%
+          summarize(mean = mean(weight))
+```
+We then calculate the mean of each group and look at the mean difference of weights. 
+
+$$
+μ_t - μ_c = `r round(mMean$mean[2] - mMean$mean[1], 2)` 
+$$
+
+Results indicate that treated mice are on average `r round((round(mMean$mean[2] - mMean$mean[1], 2) / mMean$mean[1]) *100, 0)`% heavier than the control ones. So why can't we just leave it there?
+
+Because the average values that we get are **random variables**. If we were to sample and measure another 12 mice for this experiment, we would get a different mean value. In fact these **random variables** are distribution of values. For example, if we took 10000 samples from the mouse population and measured the mean of these measurements, this would illustrate how this **random variable** is indeed *random* and that it varies.
+
+```{r}
+sampled <- replicate(10000, mean(sample(cont, 6)))
+
+hist(sampled, main = "10000 times sampling", breaks = seq(min(sampled)-0.5,max(sampled)+0.5,0.5))
+#abline(v = mean(cont) )
+```
+
+Thus we can't just say: *ooh treated mice are* `r round((round(mMean$mean[2] - mMean$mean[1], 2) / mMean$mean[1]) *100, 0)`%* *heavier.*. We need *p-values*, *Confidence Intervals*. There is a variability and we need to take this into account.
+
+## Null Distribution
+
+Let's order 20 mice and divide them randomly into groups of 10 and this time feed them with the same diet. Then again let's calculate the mean difference of these groups and repeat this 10000 times. When we plot these mean differences we would get a distribution called **Null distribution**
+
+```{r}
+population <- round(runif(100, min=15, max=20) , 2)
+
+n <- 10000
+null <- vector("numeric",n)
+for (i in 1:n) {
+control <- sample(population,10)
+treatment <- sample(population,10)
+null[i] <- mean(treatment) - mean(control)
+}
+
+nullplot <- data.frame(null = null)
+
+nullplot <- nullplot %>% mutate(group2 = case_when(
+    null >= 1.55 ~ "treat",
+    T ~ "cont"
+    ))
+ggplot(mapping = aes(x=null, y = ..density..))+
+  geom_histogram(data = nullplot , fill = "firebrick" , binwidth = 0.1)
+
+```
+
+This distribution basically shows the variability of *random variables* (in this case as mean difference), when there is actually no difference. Another thing it shows is that how probable it is to observe a certain value. In this case, how probable it is to observe a mean difference value of x when there is no difference in compared populations. 
+
+Suppose that the mean difference of weight between treated mice and control mice was 1.55. If we look at our null distribution graph and calculate the percentage of the area that is higher than 1.55, we would see that it is approximately 6% of the plot. This means that, if there was no difference between groups; 6% of the time,  we would get a value of 1.55 or higher. And this would be our **p-value** 
+
+```{r}
+#- pnorm(q = 1.55)
+ggplot(mapping = aes(x=null, y = ..density..))+
+  geom_histogram(data = nullplot , fill = "firebrick" , binwidth = 0.1)+
+  geom_histogram(data = nullplot %>% filter(group2 %in% "cont"), alpha = 1, fill = "black", binwidth = 0.1)+
+  geom_vline(data = nullplot, xintercept = 1.55)+
+  geom_density(data = nullplot, color = "blue", size = 2)
 ```
 
