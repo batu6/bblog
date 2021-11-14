@@ -11,6 +11,6 @@ navbar:
       href: about.html
 collections:
   posts:
-    disqus: bblog stats
+    disqus: bblog-stats
     share: [twitter, linkedin]
 output: distill::distill_article

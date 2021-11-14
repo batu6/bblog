@@ -10,10 +10,7 @@ output:
     self_contained: false
 editor_options: 
   chunk_output_type: console
-collections:
-  posts:
-    disqus: bblog stats
-    share: [twitter, linkedin]
+
 ---
 
 ```{r setup, include=FALSE}
