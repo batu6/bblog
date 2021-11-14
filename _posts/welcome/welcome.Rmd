@@ -1,8 +1,7 @@
 ---
 title: "Welcome to bblog"
 description: |
-  Welcome to our new blog, bblog. We hope you enjoy 
-  reading what we have to say!
+  hg
 author:
   - name: Batuhan Akçabozan
 date: 11-07-2021
