@@ -17,3 +17,5 @@ output:
   distill::distill_article:
     includes:
       in_header: utterances.html
+    toc: true
+    toc_depth: 2
