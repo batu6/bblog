@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>bblog</title>
+    <link>https://bstats.netlify.app/</link>
+    <atom:link href="https://bstats.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
+    <description>bblog
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Sun, 07 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Welcome to bblog</title>
+      <dc:creator>Batuhan Akçabozan</dc:creator>
+      <link>https://bstats.netlify.app/posts/welcome</link>
+      <description>Welcome to our new blog, bblog. We hope you enjoy 
+reading what we have to say!</description>
+      <guid>https://bstats.netlify.app/posts/welcome</guid>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Random Variables</title>
+      <dc:creator>Batuhan Akçabozan</dc:creator>
+      <link>https://bstats.netlify.app/posts/2021-11-07-post</link>
+      <description>first post</description>
+      <guid>https://bstats.netlify.app/posts/2021-11-07-post</guid>
+      <pubDate>Sat, 06 Nov 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://bstats.netlify.app/posts/2021-11-07-post/post_files/figure-html5/unnamed-chunk-4-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+  </channel>
+</rss>
