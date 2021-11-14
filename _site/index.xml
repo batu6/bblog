@@ -9,21 +9,21 @@
     <generator>Distill</generator>
     <lastBuildDate>Sun, 07 Nov 2021 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Random Variables</title>
-      <dc:creator>Batuhan Akçabozan</dc:creator>
-      <link>https://bstats.netlify.app/posts/2021-11-07-post</link>
-      <description>first post</description>
-      <guid>https://bstats.netlify.app/posts/2021-11-07-post</guid>
-      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://bstats.netlify.app/posts/2021-11-07-post/post_files/figure-html5/unnamed-chunk-4-1.png" medium="image" type="image/png" width="1248" height="768"/>
-    </item>
-    <item>
       <title>Welcome to bblog</title>
       <dc:creator>Batuhan Akçabozan</dc:creator>
       <link>https://bstats.netlify.app/posts/welcome</link>
       <description>hg</description>
       <guid>https://bstats.netlify.app/posts/welcome</guid>
+      <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Random Variables</title>
+      <dc:creator>Batuhan Akçabozan</dc:creator>
+      <link>https://bstats.netlify.app/posts/2021-11-07-post</link>
+      <description>first post</description>
+      <guid>https://bstats.netlify.app/posts/2021-11-07-post</guid>
       <pubDate>Sat, 06 Nov 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://bstats.netlify.app/posts/2021-11-07-post/post_files/figure-html5/unnamed-chunk-4-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
   </channel>
 </rss>
