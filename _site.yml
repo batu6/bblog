@@ -9,7 +9,7 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-base_url: https://bstats.netlify.app/posts/
+base_url: https://bstats.netlify.app/
 collections:
   posts:
     disqus:
