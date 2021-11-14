@@ -9,8 +9,9 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+base_url: https://bstats.netlify.app/
 collections:
   posts:
-    disqus: bblog-stats
+    disqus: bbstats
     share: [twitter, linkedin]
 output: distill::distill_article
