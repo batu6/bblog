@@ -1,22 +1,5 @@
 [
   {
-    "path": "posts/welcome/",
-    "title": "Welcome to bblog",
-    "description": "hg",
-    "author": [
-      {
-        "name": "Batuhan Akçabozan",
-        "url": {}
-      }
-    ],
-    "date": "2021-11-07",
-    "categories": [],
-    "contents": "\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2021-11-14T17:31:43+01:00",
-    "input_file": {}
-  },
-  {
     "path": "posts/2021-11-07-post/",
     "title": "Random Variables",
     "description": "first post",
@@ -34,5 +17,22 @@
     "input_file": "post.knit.md",
     "preview_width": 1248,
     "preview_height": 768
+  },
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to bblog",
+    "description": "hg",
+    "author": [
+      {
+        "name": "Batuhan Akçabozan",
+        "url": {}
+      }
+    ],
+    "date": "2021-11-07",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-11-14T21:05:21+01:00",
+    "input_file": "welcome.knit.md"
   }
 ]
