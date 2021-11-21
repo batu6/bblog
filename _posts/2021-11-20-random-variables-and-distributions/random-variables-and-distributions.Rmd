@@ -26,12 +26,13 @@ library(plyr)
 library(tidyverse)
 library(cowplot)
 library(tinytex)
-
 ```
+
+## Intro
 
 In the last post we bought thousands of mice to get the null distribution of the mouse weights. But we cannot do that every time can we? At this point **statistical inference** comes to the rescue, which helps us to *infer* the probability of observing certain outcome, with just from small amount of samples. It can does its magic because sometimes the values we have can be approximated with a certain distribution. Our mean weight differences, when plotted follows a normal distribution for example (red line). Thus if such a distribution is applicable to our values one can use that distribution to get an approximate probability of certain outcome. 
 
-```{r}
+```{r, fig.cap= "Null distribution from last post"}
 nullplot <- readRDS("../../nullplot.rds")
 
 
@@ -52,7 +53,7 @@ $$
 
 ## Central Limit Theorem
 
-```{r,fig.align ='center'}
+```{r,fig.align ='center', fig.cap= "Population and Sample Parameters"}
 knitr::include_graphics("images/Ps_mean.png")
 ```
 
@@ -83,13 +84,28 @@ knitr::include_graphics("images/memoli.jpg")
 
 Here I simulated different populations with different characteristics, each with size of 200.000, mean of μ = ~130 and sd of σ = ~34. On the left we see the different populations (bimodal, normal, uniform). I sampled from these populations with different sample sizes (n=2, 10, 30, 50), calculated the mean and repeated this process 100 times (green histograms). I also plotted two normal distributions and means. Black lines show the calculations done by using population parameters; normal distribution with sd of $\frac{\sigma_X}{\sqrt{N}}$ and mean: $μ_P$. Red lines show the empirical estimate from our sampling means; normal distribution with sd $s_X$ and mean $\bar{X}$.
 
+<aside>
+CLT 
+
+*Ne olursan ol yine gel* 
+
+diyen Mevlana,
+
+*Ben insanın değerini bölemem*
+
+*Doğu-batı, gavur-müslüm bir bana!* 
+
+diyen Aşık Mahzuni Şerif gibi.
+</aside>
+
 Here one can see that actually even with sample size of 2 we get a quite accurate estimate of the mean and sd of the means(SEM). Although the actual mean calculations does not completely distributed normally, it still resembles a normal distribution. As we increase the sample size we see that the distribution of the means get much more similar to the suggested normal distribution by CLT (with the mean of the population, and sd of $\frac{\sigma_X}{\sqrt{N}}$). 
 
 Another thing that we can notice is that SEM decreases as we increase the sample size. We get much more accurate estimate of the real population mean with high N.
 
 Lastly we have seen that CLT did not care about the population distribution too much.
 
-```{r, layout="l-body-outset", fig.width=12, fig.height=6}
+
+```{r, layout="l-body-outset", fig.width=12, fig.height=6, fig.cap= "Sample size differences illustration"}
 set.seed(1)
 
 # I tried to look at deviation of sd when you take one replicate of sample size 30 vs 30 replicate of sample size 30. I wanted to see if our sd estimate varies differently. Like Standard error of standard error. 
@@ -288,27 +304,13 @@ plot_grid(pd,p2,p10,p30,p50, nrow = 1)
 
 I would like to touch on a few points which always confused me. I think I finally got it. 
 
-<aside>
-CLT 
-
-*Ne olursan ol yine gel* 
-
-diyen Mevlana,
-
-*Ben insanın değerini bölemem*
-
-*Doğu-batı, gavur-müslüm bir bana!* 
-
-diyen Aşık Mahzuni Şerif gibi.
-</aside>
-
 ### Sample size vs Replicates
 
 I think sometimes it gets quite confusing to understand what the sample size is, at least for me.. If we look at the following figure, on the left side I took 4 samples. Let's say I took 4 mice and measured their weight and that is it. In this case I have a sample size of 4 and I only performed 1 trial/replicate. On the right side I took 4 mice again but repeated this 5 times in total. Here my sample size is 4 again and I just replicated it 5 times.
 
-On the right bottom I also illustrated that as we do more replicates we would expect these sampling means from each replicate to form a normal distribution. Higher our sample size is, more it resembles a normal distribution according to CLT. In statistics they say minimum sample size should be 30 as a rule of thumb, but as we also seen in the simulation, sample size of 10 was also reasonably good. As far as I read this rule of thumb depends mostly on the distribution of the population. **some confusing addition to this topic:**Furthermore, as we do a statistic test we divide mean differences with estimated standard deviation. With this additional division, sample size starts to matter more apparently [@dals]. But I haven't touched this part yet.
+On the right bottom I also illustrated that as we do more replicates we would expect these sampling means from each replicate to form a normal distribution. Higher our sample size is, more it resembles a normal distribution according to CLT. In statistics they say minimum sample size should be 30 as a rule of thumb, but as we also seen in the simulation, sample size of 10 was also reasonably good. As far as I read this rule of thumb depends mostly on the distribution of the population. **some confusing addition to this topic:** Furthermore, as we do a statistic test we divide mean differences with estimated standard deviation. With this additional division, sample size starts to matter more apparently [@dals]. But I haven't touched this part yet.
 
-```{r, layout="l-body-outset", fig.width=8, fig.height=7,fig.align='center'}
+```{r, layout="l-body-outset", fig.width=8, fig.height=7,fig.align='center', fig.cap= "Sampling"}
 knitr::include_graphics("images/Sampling.png")
 
 
@@ -329,7 +331,7 @@ So we can calculate the $s_X$ with this formula and calculate the estimate for S
 
 What if we have replicates? Then we already calculate mean for each replicate, thus we have more than one mean estimate. Thus one can directly calculate the sd of these means as usual to get the SEM. Which makes sense I think and also according to [this resource](https://sisu.ut.ee/measurement/33-standard-deviation-mean). THUS, as far as I understood when you have replicates you don't have to do this $\frac{s_X}{\sqrt{N}}$ to get SEM (And I don't know what to write to the place of $s_X$ to be honest when you have replicates). 
 
-```{r, layout="l-body-outset", fig.width=8, fig.height=7,fig.align='center'}
+```{r, layout="l-body-outset", fig.width=8, fig.height=7,fig.align='center', fig.cap= "Calculation of SEM"}
 knitr::include_graphics("images/Sampling2.png")
 ```
 
