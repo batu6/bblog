@@ -9,7 +9,7 @@ output:
   distill::distill_article:
     self_contained: false
     toc: true
-    toc_depth: 2
+    toc_depth: 3
 bibliography: ../../references.bib 
 csl: ../../apa.csl
 editor_options: 
@@ -71,10 +71,15 @@ Note that $\frac{\sigma_X}{\sqrt{N}}$ is also famously known as Standard Error o
 Standard Error of the Mean.. What a confusing name... But apparently this was not the case before. This is actually it is nick name it seems. Its full name is **"The estimated standard deviation of the sampling distribution of x-bar"** according to [this discussion](https://stats.stackexchange.com/questions/60484/why-is-the-formula-for-standard-error-the-way-it-is). Which is longer but more explanatory. As it suggests, SEM is just the standard deviation of the means($\bar{X}$) of your samples. So you took four measurements and calculated mean of it, repeated this 10 times. You get 10 means, standard deviation of it is SEM.
 
 <aside>
-
 Ona sadece iş arkadaşları SEM der.
 
+
+```{r,fig.align ='center', fig.cap= "Figure from: https://www.haberler.com/fotogaleri/yilan-hikayesi-nin-memoli-sinin-son-hali/"}
+knitr::include_graphics("images/memoli.jpg")
+```
 </aside>
+
+### Simulation with different sample sizes
 
 Here I simulated different populations with different characteristics, each with size of 200.000, mean of μ = ~130 and sd of σ = ~34. On the left we see the different populations (bimodal, normal, uniform). I sampled from these populations with different sample sizes (n=2, 10, 30, 50), calculated the mean and repeated this process 100 times (green histograms). I also plotted two normal distributions and means. Black lines show the calculations done by using population parameters; normal distribution with sd of $\frac{\sigma_X}{\sqrt{N}}$ and mean: $μ_P$. Red lines show the empirical estimate from our sampling means; normal distribution with sd $s_X$ and mean $\bar{X}$.
 
@@ -281,10 +286,7 @@ plot_grid(pd,p2,p10,p30,p50, nrow = 1)
 ```
 
 
-
 I would like to touch on a few points which always confused me. I think I finally got it. 
-
-### Sample size vs Replicates
 
 <aside>
 CLT 
@@ -299,6 +301,8 @@ diyen Mevlana,
 
 diyen Aşık Mahzuni Şerif gibi.
 </aside>
+
+### Sample size vs Replicates
 
 I think sometimes it gets quite confusing to understand what the sample size is, at least for me.. If we look at the following figure, on the left side I took 4 samples. Let's say I took 4 mice and measured their weight and that is it. In this case I have a sample size of 4 and I only performed 1 trial/replicate. On the right side I took 4 mice again but repeated this 5 times in total. Here my sample size is 4 again and I just replicated it 5 times.
 
