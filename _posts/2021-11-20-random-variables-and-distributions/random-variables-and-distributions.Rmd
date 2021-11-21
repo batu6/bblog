@@ -14,7 +14,6 @@ bibliography: ../../references.bib
 csl: ../../apa.csl
 editor_options: 
   chunk_output_type: inline
-
 ---
 
 
@@ -50,10 +49,11 @@ Ok, let's use normal distribution, but how can we adjust this distribution to fi
 $$
 \mbox{f}(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left( \frac{-(x-\mu)^2}{2 \sigma^2} \right)}
 $$
+
 ## Central Limit Theorem
 
-```{r,fig.align='center'}
-knitr::include_graphics("../../Ps_mean.png")
+```{r,fig.align='center', results = 'markup'}
+knitr::include_graphics("~/R wd/bblog/images/Ps_mean.png")
 ```
 
 So we need to estimate our **population mean**  $μ_X$ and **population sd** $\sigma_X$.
@@ -298,7 +298,6 @@ diyen Mevlana,
 *Doğu-batı, gavur-müslüm bir bana!* 
 
 diyen Aşık Mahzuni Şerif gibi.
-
 </aside>
 
 I think sometimes it gets quite confusing to understand what the sample size is, at least for me.. If we look at the following figure, on the left side I took 4 samples. Let's say I took 4 mice and measured their weight and that is it. In this case I have a sample size of 4 and I only performed 1 trial/replicate. On the right side I took 4 mice again but repeated this 5 times in total. Here my sample size is 4 again and I just replicated it 5 times.
@@ -306,7 +305,7 @@ I think sometimes it gets quite confusing to understand what the sample size is,
 On the right bottom I also illustrated that as we do more replicates we would expect these sampling means from each replicate to form a normal distribution. Higher our sample size is, more it resembles a normal distribution according to CLT. In statistics they say minimum sample size should be 30 as a rule of thumb, but as we also seen in the simulation, sample size of 10 was also reasonably good. As far as I read this rule of thumb depends mostly on the distribution of the population. **some confusing addition to this topic:**Furthermore, as we do a statistic test we divide mean differences with estimated standard deviation. With this additional division, sample size starts to matter more apparently [@dals]. But I haven't touched this part yet.
 
 ```{r, layout="l-body-outset", fig.width=8, fig.height=7,fig.align='center'}
-knitr::include_graphics("../../Sampling.png")
+knitr::include_graphics("~/R wd/bblog/images/Sampling.png")
 
 
 ## so when one measures 12 mice. you have no replicates but 12 samples. you can estimate SEM via sd of this sample / sqrt(12)
@@ -327,7 +326,7 @@ So we can calculate the $s_X$ with this formula and calculate the estimate for S
 What if we have replicates? Then we already calculate mean for each replicate, thus we have more than one mean estimate. Thus one can directly calculate the sd of these means as usual to get the SEM. Which makes sense I think and also according to [this resource](https://sisu.ut.ee/measurement/33-standard-deviation-mean). THUS, as far as I understood when you have replicates you don't have to do this $\frac{s_X}{\sqrt{N}}$ to get SEM (And I don't know what to write to the place of $s_X$ to be honest when you have replicates). 
 
 ```{r, layout="l-body-outset", fig.width=8, fig.height=7,fig.align='center'}
-knitr::include_graphics("../../Sampling2.png")
+knitr::include_graphics("~/R wd/bblog/images/Sampling2.png")
 ```
 
 
