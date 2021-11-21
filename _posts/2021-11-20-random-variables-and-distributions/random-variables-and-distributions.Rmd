@@ -53,7 +53,7 @@ $$
 
 ## Central Limit Theorem
 
-```{r,fig.align ='center', fig.cap= "Population and Sample Parameters"}
+```{r,fig.align ='center', fig.cap= "Population and Sample Parameters", preview=TRUE}
 knitr::include_graphics("images/Ps_mean.png")
 ```
 
