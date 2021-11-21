@@ -1,7 +1,7 @@
 ---
 title: "Random Variables, Distributions and CLT"
 description: |
-  A short description of the post.
+  We talk about CLT, sample size and SEM
 author:
   - name: Batuhan Akçabozan
 date: 2021-11-20
