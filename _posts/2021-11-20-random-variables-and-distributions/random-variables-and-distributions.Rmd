@@ -30,7 +30,7 @@ library(tinytex)
 
 ## Intro
 
-In the last post we bought thousands of mice to get the null distribution of the mouse weights. But we cannot do that every time can we? At this point **statistical inference** comes to the rescue, which helps us to *infer* the probability of observing certain outcome, with just from small amount of samples. It can does its magic because sometimes the values we have can be approximated with a certain distribution. Our mean weight differences, when plotted follows a normal distribution for example (red line). Thus if such a distribution is applicable to our values one can use that distribution to get an approximate probability of certain outcome. 
+In the last post we bought thousands of mice to get the null distribution of the mouse weights. But we cannot do that every time can we? At this point **statistical inference** comes to the rescue, which helps us to *infer* the probability of observing certain outcome, with just from small amount of samples. It can do its magic because sometimes the values we have can be approximated with a certain distribution. Our mean weight differences, when plotted follows a normal distribution for example (red line). Thus if such a distribution is applicable to our values one can use that distribution to get an approximate probability of certain outcome. 
 
 ```{r, fig.cap= "Null distribution from last post"}
 nullplot <- readRDS("../../nullplot.rds")
@@ -45,7 +45,7 @@ p2 <- ggplot()+
 plot_grid(p1,p2)
 ```
 
-Ok, let's use normal distribution, but how can we adjust this distribution to fit our data? In order to define a normal distribution we need two values: **mean** and **standard deviation** of our population. (as one can see from the scary normal distribution formula)
+Ok, let's use normal distribution, but how can we adjust this distribution to fit our data? In order to define a normal distribution we need two values: **mean**(μ) and **standard deviation**(σ) of our population. (as one can see from the scary normal distribution formula)
 
 $$
 \mbox{f}(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp{\left( \frac{-(x-\mu)^2}{2 \sigma^2} \right)}
@@ -63,13 +63,13 @@ which we can do with our **sample mean** $\bar{X}$ and **sample sd** $s_X$, with
 
 CLT says that when the sample size (N) is large, the average of these random samples $\bar{X}$ follow a normal distribution that has the mean of the population $μ_X$  and has a sd of $\frac{\sigma_X}{\sqrt{N}}$. 
 
-In another words, imagine that we sample 30 people randomly and record the mean height. Then repeat this couple of times so that we have several means. Distribution of these sampling means would follow a normal distribution with the mean $μ_X$ and with sd $\frac{\sigma_X}{\sqrt{100}}$. 
+In another words, imagine that we sample 30 people randomly and record the mean height. Then repeat this couple of times so that we have several means. Distribution of these sampling means would follow a normal distribution with the mean $μ_X$ and with sd $\frac{\sigma_X}{\sqrt{30}}$. 
 
 Note that $\frac{\sigma_X}{\sqrt{N}}$ is also famously known as Standard Error of the Mean (SEM).
 
 ### What is SEM actually?
 
-Standard Error of the Mean.. What a confusing name... But apparently this was not the case before. This is actually it is nick name it seems. Its full name is **"The estimated standard deviation of the sampling distribution of x-bar"** according to [this discussion](https://stats.stackexchange.com/questions/60484/why-is-the-formula-for-standard-error-the-way-it-is). Which is longer but more explanatory. As it suggests, SEM is just the standard deviation of the means($\bar{X}$) of your samples. So you took four measurements and calculated mean of it, repeated this 10 times. You get 10 means, standard deviation of it is SEM.
+Standard Error of the Mean.. What a confusing name... But apparently this was not the case before. This is actually it is nick name it seems. Its full name is **"The estimated standard deviation of the sampling distribution of x-bar"** according to [this discussion](https://stats.stackexchange.com/questions/60484/why-is-the-formula-for-standard-error-the-way-it-is). Which is longer but more explanatory. As it suggests, SEM is just the standard deviation of the means($\bar{X}$) of your samples. So you took four measurements and calculated mean of it, repeated this 10 times. You get 10 means, standard deviation of these means is SEM.
 
 <aside>
 Ona sadece iş arkadaşları SEM der.
@@ -98,11 +98,11 @@ diyen Mevlana,
 diyen Aşık Mahzuni Şerif gibi.
 </aside>
 
-Here one can see that actually even with sample size of 2 we get a quite accurate estimate of the mean and sd of the means(SEM). Although the actual mean calculations does not completely distributed normally, it still resembles a normal distribution. As we increase the sample size we see that the distribution of the means get much more similar to the suggested normal distribution by CLT (with the mean of the population, and sd of $\frac{\sigma_X}{\sqrt{N}}$). 
+Here one can see that actually even with sample size of 2 we get a quite accurate estimate of the mean and sd of the means(SEM). Although the actual mean calculations(histograms) are not completely normally distributed, it still resembles a normal distribution. As we increase the sample size we see that the distribution of the means get much more similar to the suggested normal distribution by CLT (with the mean of the population, and sd of $\frac{\sigma_X}{\sqrt{N}}$). 
 
 Another thing that we can notice is that SEM decreases as we increase the sample size. We get much more accurate estimate of the real population mean with high N.
 
-Lastly we have seen that CLT did not care about the population distribution too much.
+Lastly we have seen that CLT did not care about the population distribution too much. In the end we got normally distributed means.
 
 
 ```{r, layout="l-body-outset", fig.width=12, fig.height=6, fig.cap= "Sample size differences illustration"}
@@ -302,13 +302,13 @@ plot_grid(pd,p2,p10,p30,p50, nrow = 1)
 ```
 
 
-I would like to touch on a few points which always confused me. I think I finally got it. 
+I would like to touch on a few points which always confused me. I think I finally got it. :)
 
 ### Sample size vs Replicates
 
 I think sometimes it gets quite confusing to understand what the sample size is, at least for me.. If we look at the following figure, on the left side I took 4 samples. Let's say I took 4 mice and measured their weight and that is it. In this case I have a sample size of 4 and I only performed 1 trial/replicate. On the right side I took 4 mice again but repeated this 5 times in total. Here my sample size is 4 again and I just replicated it 5 times.
 
-On the right bottom I also illustrated that as we do more replicates we would expect these sampling means from each replicate to form a normal distribution. Higher our sample size is, more it resembles a normal distribution according to CLT. In statistics they say minimum sample size should be 30 as a rule of thumb, but as we also seen in the simulation, sample size of 10 was also reasonably good. As far as I read this rule of thumb depends mostly on the distribution of the population. **some confusing addition to this topic:** Furthermore, as we do a statistic test we divide mean differences with estimated standard deviation. With this additional division, sample size starts to matter more apparently [@dals]. But I haven't touched this part yet.
+On the right bottom I also illustrated that as we do more replicates we would expect these sampling means from each replicate to form a normal distribution. Higher our sample size is, more it resembles a normal distribution according to CLT. In statistics they say minimum sample size should be 30 as a rule of thumb, but as we also seen in the simulation, sample size of 10 was also reasonably good. As far as I read this rule of thumb depends mostly on the distribution of the population. **Some confusing addition to this topic:** Furthermore, as we do a statistic test we divide mean differences with estimated standard deviation. With this additional division, sample size starts to matter more apparently [@dals]. But I haven't touched this part yet.
 
 ```{r, layout="l-body-outset", fig.width=8, fig.height=7,fig.align='center', fig.cap= "Sampling"}
 knitr::include_graphics("images/Sampling.png")
@@ -323,9 +323,9 @@ knitr::include_graphics("images/Sampling.png")
 
 ```
 ### How to calculate SEM in practice?
-The thing that confused me a lot is how to calculate the SEM in practice, especially when you have or don't have replicates. On the left we measured weights of 4 mice again. According to $SEM = \frac{\sigma_X}{\sqrt{N}}$ we can get SEM. But since we don't have data from billions of mice that live in the world, we don't know the population standard deviation (σ). Good thing is we have sample sd ($s_X$) that we can use as estimate of σ. Sample standard deviation is calculated a little bit differently than population sd:  
+The thing that confused me a lot is how to calculate the SEM in practice, especially when you have or don't have replicates. In the next figure, on the left we measured weights of 4 mice again. According to $SEM = \frac{\sigma_X}{\sqrt{N}}$ we can get SEM. But since we don't have data from billions of mice that live in the world, we don't know the population standard deviation (σ). Good thing is we have sample sd ($s_X$) that we can use as estimate of σ. Sample standard deviation is calculated a little bit differently than population sd:  
 $$s_X = \sqrt{\frac{(X_i - \bar{X})^2 }{\sqrt{N - 1}}}$$ 
-At denominator we have N-1 instead of N. This is simply because, when we estimate σ from sample sd we tend to underestimate it. Thus we boost it up. There is also a more logical explanations about this, which I can discuss later.
+We use sample mean and at denominator we have N-1 instead of N. This is simply because, when we estimate σ from sample sd we tend to underestimate it. Thus we boost it up by dividing with a smaller number. There is also a more logical explanations about this, which I can discuss later.
 
 So we can calculate the $s_X$ with this formula and calculate the estimate for SEM via $SEM = \frac{s_X}{\sqrt{N}}$.
 
