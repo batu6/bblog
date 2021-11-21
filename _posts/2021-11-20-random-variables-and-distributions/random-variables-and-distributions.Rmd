@@ -325,7 +325,7 @@ knitr::include_graphics("images/Sampling.png")
 ```
 ### How to calculate SEM in practice?
 The thing that confused me a lot is how to calculate the SEM in practice, especially when you have or don't have replicates. In the next figure, on the left we measured weights of 4 mice again. According to $SEM = \frac{\sigma_X}{\sqrt{N}}$ we can get SEM. But since we don't have data from billions of mice that live in the world, we don't know the population standard deviation (σ). Good thing is we have sample sd ($s_X$) that we can use as estimate of σ. Sample standard deviation is calculated a little bit differently than population sd:  
-$$s_X = \sqrt{\frac{(X_i - \bar{X})^2 }{\sqrt{N - 1}}}$$ 
+$$s_X = \sqrt{\frac{(X_i - \bar{X})^2 }{N - 1}}$$ 
 We use sample mean and at denominator we have N-1 instead of N. This is simply because, when we estimate σ from sample sd we tend to underestimate it. Thus we boost it up by dividing with a smaller number. There is also a more logical explanations about this, which I can discuss later.
 
 So we can calculate the $s_X$ with this formula and calculate the estimate for SEM via $SEM = \frac{s_X}{\sqrt{N}}$.
