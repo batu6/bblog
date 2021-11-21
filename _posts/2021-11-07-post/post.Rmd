@@ -99,10 +99,12 @@ Suppose that the mean difference of weight between treated mice and control mice
 
 ```{r}
 #- pnorm(q = 1.55)
-ggplot(mapping = aes(x=null, y = ..density..))+
+p1 <- ggplot(mapping = aes(x=null, y = ..density..))+
   geom_histogram(data = nullplot , fill = "firebrick" , binwidth = 0.1)+
   geom_histogram(data = nullplot %>% filter(group2 %in% "cont"), alpha = 1, fill = "black", binwidth = 0.1)+
   geom_vline(data = nullplot, xintercept = 1.55)+
   geom_density(data = nullplot, color = "blue", size = 1)
+
+p1
 ```
 
