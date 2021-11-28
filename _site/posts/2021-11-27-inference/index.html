@@ -2172,15 +2172,19 @@ document.addEventListener('DOMContentLoaded', function() {
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#example">Example</a></li>
+<li><a href="#math-with-random-variables">Math with random variables</a>
+<ul>
+<li><a href="#example-for-sum-of-variances">Example for sum of variances</a></li>
+</ul></li>
 <li><a href="#in-practice">In practice</a></li>
-<li><a href="#illustration">Illustration</a></li>
+<li><a href="#illustration-sample-size-vs-normality">Illustration sample size vs normality</a></li>
 </ul>
 </nav>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
+<h2 id="math-with-random-variables">Math with random variables</h2>
 <p>It is time we talk about some math(dört işlem) with random variables. As CLT indicates (<a href="https://bstats.netlify.app/posts/2021-11-20-random-variables-and-distributions/">see the post</a>), we now that when sample size is large the means are distributed randomly. To illustrate the math with random variables more easily, let’s consider we have the following measurements and let’s assume that they are normally distributed: <span class="math inline">\(X = (10cm, 20cm, 30cm)\)</span>. It has a mean <span class="math inline">\(\bar{X}\)</span> of 20 and sd <span class="math inline">\(S_x\)</span> of ~8.2.</p>
 <p>If we add or subtract a constant value from our random variable, the new mean <span class="math inline">\(\bar{X}{new}\)</span> becomes <span class="math inline">\(\bar{X} + constant\)</span> and our sd <span class="math inline">\(S_x\)</span> does not change since the average distance of the variables to the mean is still the same.</p>
 <p>If we multiply our random variable <span class="math inline">\(X\)</span> with a constant, for example we converted our cm measurements to mm, the new mean <span class="math inline">\(\bar{X}{new}\)</span> becomes <span class="math inline">\(\bar{X} * constant\)</span> and our sd <span class="math inline">\(S_x\)</span> becomes also <span class="math inline">\(S_{new} = S_x * constant\)</span> (now the spread of our data points increased).</p>
@@ -2193,9 +2197,9 @@ Figure 1: Some math with random variables
 </div>
 </div>
 <p>So far it is clear I believe. So what if we sum or multiply our random variable <span class="math inline">\(X\)</span> with another random variable <span class="math inline">\(Y\)</span>. This type of a calculation we encounter more. Generally we are interested in mean differences of two populations for example. Then we subtract these means right? Please note that, as our random variables, their mean and sd are also random variables. So let’s see how the things will work out!</p>
-<p>The mean:</p>
+<p><strong>The mean:</strong></p>
 <p>As previously, when we sum or subtract the two random variables their mean also gets summed up or subtracted. So: <span class="math inline">\(mean(X + Y) = \bar{X} + \bar{Y}\)</span> or <span class="math inline">\(mean(X - Y) = \bar{X} - \bar{Y}\)</span>. This was easy.</p>
-<p>The Sd:</p>
+<p><strong>The Sd:</strong></p>
 <p>This time we need to assume a few things and we will also work with variance. Variance is square of the sd <span class="math inline">\(S_x^2\)</span>. The reason we will use variance instead of sd is that simply it makes the math much more simple.</p>
 <p>If we skip the math we get this equation:</p>
 <p><span class="math display">\[
@@ -2209,7 +2213,7 @@ Cov(X,Y) = Cor(X,Y)*\sigma_X*\sigma_Y
 <p><span class="math display">\[
 Var(X+Y) = Var(X) + Var(Y)
 \]</span> This tells us that variance of the sum of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is equal to sum of their variances. <strong>GIVEN they are not correlated</strong>.</p>
-<h3 id="example">Example</h3>
+<h3 id="example-for-sum-of-variances">Example for sum of variances</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
@@ -2225,13 +2229,13 @@ Var(X+Y) = Var(X) + Var(Y)
 </code></pre>
 </div>
 </div>
-<p><strong>When they are not correlated:</strong></p>
+<p><strong>When random variables are not correlated:</strong></p>
 <p>Cor(X,Y) = 0.02</p>
 <p>almost no correlation.</p>
 <p>var(x) + var(y) = 232.78</p>
 <p>var(x + y) = 236.74</p>
 <p>close enough!</p>
-<p><strong>When they are correlated:</strong></p>
+<p><strong>When random variables are correlated:</strong></p>
 <p>Cor(a,b) = 1</p>
 <p>full correlation</p>
 <p>var(a) + var(b) = 2773.87</p>
@@ -2243,7 +2247,13 @@ Var(X+Y) = Var(X) + Var(Y)
 <p><span class="math display">\[
 \frac{\bar{X}-\bar{Y}}{sd_{XY}}
 \]</span><br />
-1. Here note that both numerator and denominator are random variables. 2. As we have seen above if we subtract two random variables, their mean also gets subtracted, hence numerator. (we are using sample means as an estimate of the real population means.) 3. We also saw that when we subtracted two random variables the new variance is equal to the sum of the individual variances. Thus <span class="math inline">\(sd_{XY}\)</span> will be equal to <span class="math inline">\(\sqrt{\frac{s_X^2}{M} + \frac{s_Y^2}{N}}\)</span> where M and N are sample sizes of random variables X and Y. 4. If sample size is high, according to CLT our random variables will be also normal. Thus the parameters at the numerator and denominator will be also normal<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. 5. The issue is division of two normal values may not be normal. This is due to the fact that we can underestimate the sd<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> (Especially when the sample size is low). Thus our probability of observing bigger test statistic values increases. (see the Illustration section at the bottom)</p>
+1. Here note that both numerator and denominator are random variables.</p>
+<ol start="2" type="1">
+<li><p>As we have seen above if we subtract two random variables, their mean also gets subtracted, hence numerator. (we are using sample means as an estimate of the real population means.)</p></li>
+<li><p>We also saw that when we subtracted two random variables the new variance is equal to the sum of the individual variances. Thus <span class="math inline">\(sd_{XY}\)</span> will be equal to <span class="math inline">\(\sqrt{\frac{s_X^2}{M} + \frac{s_Y^2}{N}}\)</span> where M and N are sample sizes of random variables X and Y.</p></li>
+<li><p>If sample size is high, according to CLT our random variables will be also normal. Thus the parameters at the numerator and denominator will be also normal<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p></li>
+<li><p>The issue is division of two normal values may not be normal. This is due to the fact that we can underestimate the sd<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> (Especially when the sample size is low). Thus our probability of observing bigger test statistic values increases. (see the Illustration section at the bottom)</p></li>
+</ol>
 <p>This change in probabilities creates a new distribution, that we know as <strong>Student’s t distribution</strong>. <a href="https://en.wikipedia.org/wiki/William_Sealy_Gosset">More on the story</a></p>
 <p>This is the final version of our statistic. Mean difference of the random variables divided by its standard deviation<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <p><span class="math display">\[
@@ -2270,7 +2280,7 @@ Figure 3: t-distribution with different degrees of freedom, code from: <a href="
 </div>
 </div>
 <p>For the small sample sizes, distribution becomes more wide(higher tails, red line) and it accounts for the higher probability of observing extremes<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. As the sample size increases t-distribution also starts to resemble the normal distribution.</p>
-<h2 id="illustration">Illustration</h2>
+<h2 id="illustration-sample-size-vs-normality">Illustration sample size vs normality</h2>
 <p>Here I will directly use the code from the book “Data Analysis for the Life Sciences” to show it.<span class="citation" data-cites="dals"><sup>[<a href="#ref-dals" role="doc-biblioref">1</a>]</sup></span> Here we have a population of mice, half treated with a control diet other half treated with different diet and we compare their weights. From each group we take samples and calculate the mean difference of our samples. We repeat this 10000 times. We will compare different sample sizes: 3, 12, 25 and 50.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <pre><code>[1] 2.375517</code></pre>
