@@ -29,7 +29,7 @@ library(cowplot)
 
 ## Math with random variables
 
-It is time we talk about some math(dört işlem) with random variables. As CLT indicates ([see the post](https://bstats.netlify.app/posts/2021-11-20-random-variables-and-distributions/)), we now that when sample size is large the means are distributed randomly. To illustrate the math with random variables more easily, let's consider we have the following measurements and let's assume that they are normally distributed: $X = (10cm, 20cm, 30cm)$. It has a mean $\bar{X}$ of 20 and sd $S_x$ of ~8.2. 
+It is time we talk about some math(dört işlem) with random variables. As CLT indicates ([see the post](https://bstats.netlify.app/posts/2021-11-20-random-variables-and-distributions/)), we know that when sample size is large the means are distributed randomly. To illustrate the math with random variables more easily, let's consider we have the following measurements and let's assume that they are normally distributed: $X = (10cm, 20cm, 30cm)$. It has a mean $\bar{X}$ of 20 and sd $S_x$ of ~8.2. 
 
 If we add or subtract a constant value from our random variable, the new mean $\bar{X}{new}$ becomes $\bar{X} + constant$ and our sd $S_x$ does not change since the average distance of the variables to the mean is still the same.
 
