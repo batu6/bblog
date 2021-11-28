@@ -10,6 +10,8 @@ output:
     self_contained: false
     toc: true
     toc_depth: 2
+bibliography: ../../references.bib 
+csl: ../../apa.csl
 editor_options: 
   chunk_output_type: console
 
@@ -69,7 +71,7 @@ Thus we can't just say: *ooh treated mice are* `r round((round(mMean$mean[2] - m
 
 ## Null Distribution
 
-Let's order 20 mice and divide them randomly into groups of 10 and this time feed them with the same diet. Then again let's calculate the mean difference of these groups and repeat this 10000 times. When we plot these mean differences we would get a distribution called **Null distribution**
+Let's order 20 mice and divide them randomly into groups of 10 and this time feed them with the same diet. Then again let's calculate the mean difference of these groups and repeat this 10000 times. When we plot these mean differences we would get a distribution called **Null distribution**. This null distribution is the distribution that we compare our experimental result. In this case our *null hypothesis* would be $\bar{X} - \bar{Y} = 0$. So, difference of the means of the two groups is 0. If we get an extreme observation that falls at the edges of the null distribution, we can reject this null hypothesis.  
 
 ```{r}
 population <- round(runif(100, min=15, max=20) , 2)

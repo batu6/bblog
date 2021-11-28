@@ -7,14 +7,23 @@
     <description>bblog
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 19 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Inference</title>
+      <dc:creator>Batuhan AkÃ§abozan</dc:creator>
+      <link>https://bstats.netlify.app/posts/2021-11-27-inference</link>
+      <description>A short description of the post.</description>
+      <guid>https://bstats.netlify.app/posts/2021-11-27-inference</guid>
+      <pubDate>Fri, 26 Nov 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://bstats.netlify.app/posts/2021-11-27-inference/images/math.png" medium="image" type="image/png" width="1466" height="320"/>
+    </item>
     <item>
       <title>Random Variables, Distributions and CLT</title>
       <dc:creator>Batuhan Akçabozan</dc:creator>
       <link>https://bstats.netlify.app/posts/2021-11-20-random-variables-and-distributions</link>
       <description>We talk about CLT, sample size and SEM</description>
       <guid>https://bstats.netlify.app/posts/2021-11-20-random-variables-and-distributions</guid>
-      <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 20 Nov 2021 00:00:00 +0000</pubDate>
       <media:content url="https://bstats.netlify.app/posts/2021-11-20-random-variables-and-distributions/images/Ps_mean.png" medium="image" type="image/png" width="1022" height="781"/>
     </item>
     <item>
