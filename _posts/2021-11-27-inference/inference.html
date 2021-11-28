@@ -1513,7 +1513,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><a href="#example-for-sum-of-variances">Example for sum of variances</a></li>
 </ul></li>
 <li><a href="#in-practice">In practice</a></li>
-<li><a href="#illustration-sample-size-vs-normality">Illustration sample size vs normality</a></li>
+<li><a href="#illustration-sample-size-vs-normality">Illustration: sample size vs normality</a></li>
 </ul>
 </nav>
 </div>
@@ -1582,9 +1582,9 @@ Var(X+Y) = Var(X) + Var(Y)
 <p>To calculate a test statistic we divide the random variable with its standard deviation. This, in theory gives us a normal distribution with mean = 0 and sd = 1<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (given high sample size)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. This also allows us to standardize the data. Even if the original data values are at the range of thousands, we standardize it to a standard distribution.</p>
 <p><span class="math display">\[
 \frac{\bar{X}-\bar{Y}}{sd_{XY}}
-\]</span><br />
-1. Here note that both numerator and denominator are random variables.</p>
-<ol start="2" type="1">
+\]</span></p>
+<ol type="1">
+<li><p>Here note that both numerator and denominator are random variables.</p></li>
 <li><p>As we have seen above if we subtract two random variables, their mean also gets subtracted, hence numerator. (we are using sample means as an estimate of the real population means.)</p></li>
 <li><p>We also saw that when we subtracted two random variables the new variance is equal to the sum of the individual variances. Thus <span class="math inline">\(sd_{XY}\)</span> will be equal to <span class="math inline">\(\sqrt{\frac{s_X^2}{M} + \frac{s_Y^2}{N}}\)</span> where M and N are sample sizes of random variables X and Y.</p></li>
 <li><p>If sample size is high, according to CLT our random variables will be also normal. Thus the parameters at the numerator and denominator will be also normal<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p></li>
@@ -1616,7 +1616,7 @@ Figure 3: t-distribution with different degrees of freedom, code from: <a href="
 </div>
 </div>
 <p>For the small sample sizes, distribution becomes more wide(higher tails, red line) and it accounts for the higher probability of observing extremes<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. As the sample size increases t-distribution also starts to resemble the normal distribution.</p>
-<h2 id="illustration-sample-size-vs-normality">Illustration sample size vs normality</h2>
+<h2 id="illustration-sample-size-vs-normality">Illustration: sample size vs normality</h2>
 <p>Here I will directly use the code from the book “Data Analysis for the Life Sciences” to show it.<span class="citation" data-cites="dals"><sup>[<a href="#ref-dals" role="doc-biblioref">1</a>]</sup></span> Here we have a population of mice, half treated with a control diet other half treated with different diet and we compare their weights. From each group we take samples and calculate the mean difference of our samples. We repeat this 10000 times. We will compare different sample sizes: 3, 12, 25 and 50.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <pre><code>[1] 2.375517</code></pre>
