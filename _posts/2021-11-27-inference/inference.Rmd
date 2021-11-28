@@ -1,9 +1,9 @@
 ---
-title: "Inference"
+title: "Random variable Characteristics, Statistical Inference & t-test"
 description: |
-  A short description of the post.
+  Here I talk about some characteristics of random variables, then we see how these characteristics are applied in statistical testing and t-test makes an appearance.
 author:
-  - name: Batuhan AkÃ§abozan
+  - name: Batuhan Akçabozan
     url: {}
 date: 2021-11-27
 output:
@@ -33,7 +33,7 @@ If we add or subtract a constant value from our random variable, the new mean $\
 
 If we multiply our random variable $X$ with a constant, for example we converted our cm measurements to mm, the new mean $\bar{X}{new}$ becomes $\bar{X} * constant$ and our sd $S_x$ becomes also $S_{new} = S_x * constant$ (now the spread of our data points increased). 
  
-```{r}
+```{r, layout="l-body-outset", fig.width=9, fig.height=9,fig.align='center', fig.cap= "Some math with random variables"}
 knitr::include_graphics("images/math.png")
 ```
 
@@ -71,6 +71,8 @@ This tells us that variance of the sum of $X$ and $Y$ is equal to sum of their v
 
 ### Example
 ```{r, echo=T}
+set.seed(1)
+
 # Almost not correlated random variables:
 x <- runif(n = 100, min = 10,max = 50)
 y <- runif(n = 100, min = 60,max = 100)
@@ -121,7 +123,7 @@ $$
 
 This change in probabilities creates a new distribution, that we know as **Student's t distribution**. [More on the story](https://en.wikipedia.org/wiki/William_Sealy_Gosset)
 
-This is the final version of our statistic. Mean difference of the random variables divided by its standard deviation^[aka SEM].
+This is the final version of our statistic. Mean difference of the random variables divided by its standard deviation^[aka SEM] ^[Since in this example we are comparing two random variables, if we do a t-test it would be called two sample t-test]. 
 
 $$
 \frac{\bar{X}-\bar{Y}}{\sqrt{\frac{s_X^2}{M} + \frac{s_Y^2}{N}}}
@@ -137,7 +139,7 @@ knitr::include_graphics("images/Gosset.jpg")
 
 CLT is dependent on high sample size. Our estimate of variances are accurate when the sample size is high and thus the test statistic follows a standard normal distribution. However it does not account for the underestimation of variance when our sample size is not that high. t-distribution looks similar to normal distribution formula but it also comes with an additional flavor called **degrees of freedom (df)**, that accounts for this. Where $df = n - 1$     
 
-```{r}
+```{r, layout="l-body-outset", fig.width=12, fig.height=6, fig.cap= "t-distribution with different degrees of freedom, code from: https://stackoverflow.com/questions/49236741/plot-student-s-t-distribution-with-degrees-of-freedom", preview = T}
 x <- seq(-3, 3, length=1000)
 hx <- dnorm(x)
 
@@ -145,7 +147,7 @@ degf <- c(1, 2, 5, 10)
 colors <- c("red", "blue", "darkgreen", "gold", "black")
 labels <- c("df=1", "df=2", "df=5", "df=10", "normal")
 
-plot(x, hx, type="l", lty=1, xlab="x value",
+plot(x, hx, type="l", lty=1, xlab="t value",
      ylab="Density", main="Comparison of t Distributions")
 
 for (i in 1:4){
