@@ -424,7 +424,8 @@ We use sample mean and at denominator we have N-1 instead of N. This is simply b
 
 So we can calculate the $s_X$ with this formula and calculate the estimate for SEM via $SEM = \frac{s_X}{\sqrt{N}}$.
 
-**take the following paragraph and figure with caution. See the notes at the beginning of the post**
+**Take the following paragraph and figure with caution. See the notes at the beginning of the post**
+
 What if we have replicates? Then we already calculate mean for each replicate, thus we have more than one mean estimate. Thus one can directly calculate the sd of these means as usual to get the SEM. Which makes sense I think and also according to [this resource](https://sisu.ut.ee/measurement/33-standard-deviation-mean). THUS, as far as I understood when you have replicates you don't have to do this $\frac{s_X}{\sqrt{N}}$ to get SEM (And I don't know what to write to the place of $s_X$ to be honest when you have replicates). 
 
 ```{r, layout="l-body-outset", fig.width=8, fig.height=7,fig.align='center', fig.cap= "Calculation of SEM"}
