@@ -14,7 +14,7 @@ output:
 bibliography: ../../references.bib 
 csl: ../../apa.csl
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 
@@ -28,6 +28,96 @@ library(tidyverse)
 library(cowplot)
 library(tinytex)
 ```
+
+## Editor's Notes / Corrections (05.12.21)
+
+In the last paragraph of this post I discuss calculation of SEM with replicates and without replicates and I do some illustrations at the figures 6 and 7. I think they are conceptually correct but there are a few points that I must correct for. 
+
+As I was trying to plot the flow cytometry data this weekend, I found myself thinking about sample size and replicates again. Ideally you can take mice and divide them into two groups like: control and treatment. Then each mouse is relatively random sampled. (Although they are technically inbred.). In my experiment, I divide cells from one mice into groups. Then I started thinking if comparing these cell groups with each other made sense, since technically they  come from same mouse. I thought they are also kind of dependent. But since we divide the cells randomly into groups, perhaps they are actually randomly sampled. But then again I do the same experiment couple of times and then I have data from other mice, which allows me to make broader conclusions. I guess also in cell culture experiments people don't take a new batch for each experimental condition. They divide the batch into groups and then repeat the experiment with another batch. Then compare the results from different batches. That is/was a bit confusing. There are different depths in an experiment, but I guess everything depends on the question you are asking. If I am interested in mouse weight, then each mouse is my sample or actually replicate. If I am interested in the cells then each experimental group with the cells becomes my sample. (I am not sure but maybe the most ideal would be treating cells from each mice with just one treatment, so that each cell population are independent from each other (like new batch of cells for each treatment). But then it would result in animal massacre and that does not make sense at all.)
+
+Anyway in the figures 6 and 7, I say that if I take 4 mice and calculate the mean of the parameter of interest and repeat this 3 times, then the sd of these means are actually SEM estimation from single sampling. In other words if I measured the weights from 4 different mice, I can calculate the SEM via dividing sd of my measurements to square root of 4(n). If I repeated this experiment many more times, sd of the mean of each repeat would be the SEM I calculated earlier. The problem is, below I claimed that if we have replicates we can calculate the SEM by directly taking the sd of the replicate means, we don't need to estimate it since we have replicates. But I was confused about the term of "biological replicates". In theory if you are interested in the mean weight differences in different experimental conditions, each mice you use is a biological replicate. So when you compare 12 control mice to 12 treated mice you have sample size of 12. One would not repeat this experiment with more groups of 24 mice to get a mean from each of them to compare the effect of control vs treatment conditions. A different lab may repeat this experiment with 24 mice and then comparing these two experiments would be a question of reproduciblity (like meta analysis). In that case we would have sample size of 2 I think, and we would go one step deeper. So in reality we never calculate SEM from replicate standard deviations. We don't need to. If we had 12 mice we wouldn't use 6 of them to do the experiment and then use the other 6 to repeat it, we would use all 12 mice and keep our sample size high.
+
+I also wanted to compare different ways of estimating SEM as I write this. I took samples with the size of (n=3, 10, 30) from a population (σ = 20, size = 100000). Then I calculated the sd of sampling means(SEM) with 3 different methods:
+
+1. $\frac{\sigma}{\sqrt{n}}$
+
+I used the population sd(σ). Which is indicated as **horizontal line**. (Expectation) 
+
+2. $\frac{sd}{\sqrt{n}}$
+
+I used sd of the sample as the estimate of σ. **Purple dots**
+
+3. sd of the sampling means
+
+I repeated the sampling process 1000 times and calculated the SEM directly via taking sd of the sampling means. **Orange dots**
+
+The whole process was repeated 25 times showing the results I got each 25 times. 
+
+```{r, layout="l-body-outset", fig.width=10, fig.height=3, fig.cap= "Different sample sizes and estimation of SEM via different methods"}
+#In flow cytometry, I measure 50000 cells for one parameter and then take the median fluorescence intensity of that parameter. So technically 50000 cells become my "technical replicates". Then I repeat the experiment with other 2 mice and calculate median. In the end I have 3 data point, 3 replicates that I can compare.
+set.seed(1)
+
+sdPop <- function(vector, n){
+  sdsam <- sqrt(sum( (vector-mean(vector))^2) / n)
+  return(sdsam)
+}
+
+
+n1 <- rnorm(100000, mean = 160, sd = 20)
+
+semEstimator <- function(set, setN,sampsize, replicationN= 1000){
+  
+      estimate <- list()
+      popisd <- sdPop(set,setN)
+      p <- popisd / sqrt(sampsize)
+      
+      for(i in 1:25){
+        samp <- sample(set, sampsize)
+        rep <- replicate(replicationN,mean(sample(set, sampsize)) )
+        
+        e <- sd(samp) / sqrt(sampsize)
+        s <- sd(rep)
+        
+        estimate[[i]] <- c(e,s)
+        
+      }
+      
+      esti_df <- do.call(rbind.data.frame, estimate)
+      colnames(esti_df) <- c("e","s")
+      esti_df <- esti_df %>%
+        mutate(trial = 1:nrow(esti_df)) %>%
+        pivot_longer(cols = 1:2, names_to = "estimates",values_to = "SEM")
+      
+      plot <- esti_df %>%
+        ggplot()+
+        geom_point(aes(x= trial,y = SEM, color = estimates))+
+        geom_hline(yintercept = p)+
+        scale_color_viridis_d(begin = 0.2,end = 0.7, option = "B")+
+        theme_bw()+
+        theme(
+          legend.position = "none"
+        )+
+        scale_y_continuous(breaks = 1:20, limits = c(1,20))
+      
+      return(plot)
+}
+
+
+plot_grid(
+semEstimator(n1, 100000,sampsize = 3),
+semEstimator(n1, 100000,sampsize = 10),
+semEstimator(n1, 100000,sampsize = 30),nrow = 1,labels = list("n=3", "n=10", "n=30")
+)
+
+# low replication number
+#plot_grid(
+#semEstimator(n1, 100000,sampsize = 3,replicationN = 3),
+#semEstimator(n1, 100000,sampsize = 10,replicationN = 3),
+#semEstimator(n1, 100000,sampsize = 30,replicationN = 3),nrow = 1,labels = list("n=3", "n=10", "n=30")
+#)
+```
+
+One can see that estimating SEM via $\frac{sd}{\sqrt{n}}$ is not actually that far away from the expectation especially with increasing sample size. When we do replicates it looks more accurate true, but when I did just 3 replicates that estimate was also way off(not shown). It is fun little graph. I hope I was able to explain it.   
 
 ## Intro
 
@@ -155,6 +245,9 @@ n1 <- rnorm(100000, mean = 160, sd = 20)
 n2 <- rnorm(100000, mean = 100, sd = 10)
 
 bimod <- c(n1, n2)
+
+
+
 #
 #mean(bimod)
 #sd(bimod)
@@ -324,12 +417,14 @@ knitr::include_graphics("images/Sampling.png")
 
 ```
 ### How to calculate SEM in practice?
+
 The thing that confused me a lot is how to calculate the SEM in practice, especially when you have or don't have replicates. In the next figure, on the left we measured weights of 4 mice again. According to $SEM = \frac{\sigma_X}{\sqrt{N}}$ we can get SEM. But since we don't have data from billions of mice that live in the world, we don't know the population standard deviation (σ). Good thing is we have sample sd ($s_X$) that we can use as estimate of σ. Sample standard deviation is calculated a little bit differently than population sd:  
 $$s_X = \sqrt{\frac{(X_i - \bar{X})^2 }{N - 1}}$$ 
 We use sample mean and at denominator we have N-1 instead of N. This is simply because, when we estimate σ from sample sd we tend to underestimate it. Thus we boost it up by dividing with a smaller number. There is also a more logical explanations about this, which I can discuss later.
 
 So we can calculate the $s_X$ with this formula and calculate the estimate for SEM via $SEM = \frac{s_X}{\sqrt{N}}$.
 
+**take the following paragraph and figure with caution. See the notes at the beginning of the post**
 What if we have replicates? Then we already calculate mean for each replicate, thus we have more than one mean estimate. Thus one can directly calculate the sd of these means as usual to get the SEM. Which makes sense I think and also according to [this resource](https://sisu.ut.ee/measurement/33-standard-deviation-mean). THUS, as far as I understood when you have replicates you don't have to do this $\frac{s_X}{\sqrt{N}}$ to get SEM (And I don't know what to write to the place of $s_X$ to be honest when you have replicates). 
 
 ```{r, layout="l-body-outset", fig.width=8, fig.height=7,fig.align='center', fig.cap= "Calculation of SEM"}

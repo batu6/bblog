@@ -144,7 +144,7 @@ knitr::include_graphics("images/Gosset.jpg")
 ```
 </aside>
 
-CLT is dependent on high sample size. Our estimate of variances are accurate when the sample size is high and thus the test statistic follows a standard normal distribution. However it does not account for the underestimation of variance when our sample size is not that high. t-distribution looks similar to normal distribution formula but it also comes with an additional flavor called **degrees of freedom (df)**, that accounts for this. Where $df = n - 1$     
+CLT is dependent on high sample size. Our estimate of variances are accurate when the sample size is high and thus the test statistic follows a standard normal distribution. However it does not account for the underestimation of variance when our sample size is not that high. t-distribution looks similar to normal distribution formula but it also comes with an additional flavor called **degrees of freedom (df)**, that accounts for this. 
 
 ```{r, layout="l-body-outset", fig.width=12, fig.height=6, fig.cap= "t-distribution with different degrees of freedom, code from: https://stackoverflow.com/questions/49236741/plot-student-s-t-distribution-with-degrees-of-freedom", preview = T}
 x <- seq(-3, 3, length=1000)
