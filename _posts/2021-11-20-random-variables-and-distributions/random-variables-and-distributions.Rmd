@@ -160,7 +160,7 @@ Note that $\frac{\sigma_X}{\sqrt{N}}$ is also famously known as Standard Error o
 
 ### What is SEM actually?
 
-Standard Error of the Mean.. What a confusing name... But apparently this was not the case before. This is actually it is nick name it seems. Its full name is **"The estimated standard deviation of the sampling distribution of x-bar"** according to [this discussion](https://stats.stackexchange.com/questions/60484/why-is-the-formula-for-standard-error-the-way-it-is). Which is longer but more explanatory. As it suggests, SEM is just the standard deviation of the means($\bar{X}$) of your samples. So you took four measurements and calculated mean of it, repeated this 10 times. You get 10 means, standard deviation of these means is SEM.
+Standard Error of the Mean.. What a confusing name... But apparently this was not the case before. This is actually its nick name it seems. Its full name is **"The estimated standard deviation of the sampling distribution of x-bar"** according to [this discussion](https://stats.stackexchange.com/questions/60484/why-is-the-formula-for-standard-error-the-way-it-is). Which is longer but more explanatory. As it suggests, SEM is just the standard deviation of the means($\bar{X}$) of your samples. So you took four measurements and calculated mean of it, repeated this 10 times. You get 10 means, standard deviation of these means is SEM.
 
 <aside>
 Ona sadece iş arkadaşları SEM der.
