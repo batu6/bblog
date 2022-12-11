@@ -230,7 +230,7 @@ set.seed(1)
 #mean(vsd2)
 #mean(ankara_height)
 #sd(ankara_height)/sqrt(30)
-#
+
 
 
 
