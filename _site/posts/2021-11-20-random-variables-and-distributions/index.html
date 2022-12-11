@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,9 +74,9 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
 code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
@@ -832,6 +833,7 @@ d-title .dt-tags {
 d-article table.gt_table td,
 d-article table.gt_table th {
   border-bottom: none;
+  font-size: 100%;
 }
 
 .html-widget {
@@ -1073,10 +1075,6 @@ figure img.external {
   position: relative;
   margin-bottom: 2.5em;
   margin-top: 1.5em;
-}
-
-.figure img {
-  width: 100%;
 }
 
 .figure .caption {
@@ -1908,9 +1906,21 @@ function init_distill() {
 
     // hoverable references
     $('span.citation[data-cites]').each(function() {
+      const citeChild = $(this).children()[0]
+      // Do not process if @xyz has been used without escaping and without bibliography activated
+      // https://github.com/rstudio/distill/issues/466
+      if (citeChild === undefined) return true
+
+      if (citeChild.nodeName == "D-FOOTNOTE") {
+        var fn = citeChild
+        $(this).html(fn.shadowRoot.querySelector("sup"))
+        $(this).id = fn.id
+        fn.remove()
+      }
       var refs = $(this).attr('data-cites').split(" ");
       var refHtml = refs.map(function(ref) {
-        return "<p>" + $('#ref-' + ref).html() + "</p>";
+        // Could use CSS.escape too here, we insure backward compatibility in navigator
+        return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
       }).join("\n");
       window.tippy(this, {
         allowHTML: true,
@@ -1922,6 +1932,31 @@ function init_distill() {
         placement: 'bottom-start'
       });
     });
+
+    // fix footnotes in tables (#411)
+    // replacing broken distill.pub feature
+    $('table d-footnote').each(function() {
+      // we replace internal showAtNode methode which is triggered when hovering a footnote
+      this.hoverBox.showAtNode = function(node) {
+        // ported from https://github.com/distillpub/template/pull/105/files
+        calcOffset = function(elem) {
+            let x = elem.offsetLeft;
+            let y = elem.offsetTop;
+            // Traverse upwards until an `absolute` element is found or `elem`
+            // becomes null.
+            while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                x += elem.offsetLeft;
+                y += elem.offsetTop;
+            }
+
+            return { left: x, top: y };
+        }
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+        const bbox = node.getBoundingClientRect();
+        const offset = calcOffset(node);
+        this.show([offset.left + bbox.width, offset.top + bbox.height]);
+      }
+    })
 
     // clear polling timer
     clearInterval(tid);
@@ -2021,6 +2056,8 @@ function init_common() {
   // mark non-body figures created by knitr chunks as 100% width
   $('.layout-chunk').each(function(i, val) {
     var figures = $(this).find('img, .html-widget');
+    // ignore leaflet img layers (#106)
+    figures = figures.filter(':not(img[class*="leaflet"])')
     if ($(this).attr('data-layout') !== "l-body") {
       figures.css('width', '100%');
     } else {
@@ -2043,7 +2080,7 @@ function init_common() {
   // get rid of index.html references in header
   if (window.location.protocol !== "file:") {
     $('.distill-site-header a[href]').each(function(i,val) {
-      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
     });
   }
 
@@ -2082,7 +2119,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!--/radix_placeholder_distill-->
-  <script src="../../site_libs/header-attrs-2.11/header-attrs.js"></script>
+  <script src="../../site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -2172,14 +2209,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#editors-notes-corrections-05.12.21">Editor’s Notes / Corrections (05.12.21)</a></li>
-<li><a href="#intro">Intro</a></li>
-<li><a href="#central-limit-theorem">Central Limit Theorem</a>
+<li><a href="#editors-notes-corrections-05.12.21" id="toc-editors-notes-corrections-05.12.21">Editor’s Notes / Corrections (05.12.21)</a></li>
+<li><a href="#intro" id="toc-intro">Intro</a></li>
+<li><a href="#central-limit-theorem" id="toc-central-limit-theorem">Central Limit Theorem</a>
 <ul>
-<li><a href="#what-is-sem-actually">What is SEM actually?</a></li>
-<li><a href="#simulation-with-different-sample-sizes">Simulation with different sample sizes</a></li>
-<li><a href="#sample-size-vs-replicates">Sample size vs Replicates</a></li>
-<li><a href="#how-to-calculate-sem-in-practice">How to calculate SEM in practice?</a></li>
+<li><a href="#what-is-sem-actually" id="toc-what-is-sem-actually">What is SEM actually?</a></li>
+<li><a href="#simulation-with-different-sample-sizes" id="toc-simulation-with-different-sample-sizes">Simulation with different sample sizes</a></li>
+<li><a href="#sample-size-vs-replicates" id="toc-sample-size-vs-replicates">Sample size vs Replicates</a></li>
+<li><a href="#how-to-calculate-sem-in-practice" id="toc-how-to-calculate-sem-in-practice">How to calculate SEM in practice?</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -2190,7 +2227,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 id="editors-notes-corrections-05.12.21">Editor’s Notes / Corrections (05.12.21)</h2>
 <p>In the last paragraph of this post I discuss calculation of SEM with replicates and without replicates and I do some illustrations at the figures 6 and 7. I think they are conceptually correct but there are a few points that I must correct for.</p>
 <p>As I was trying to plot the flow cytometry data this weekend, I found myself thinking about sample size and replicates again. Ideally you can take mice and divide them into two groups like: control and treatment. Then each mouse is relatively random sampled. (Although they are technically inbred.). In my experiment, I divide cells from one mice into groups. Then I started thinking if comparing these cell groups with each other made sense, since technically they come from same mouse. I thought they are also kind of dependent. But since we divide the cells randomly into groups, perhaps they are actually randomly sampled. But then again I do the same experiment couple of times and then I have data from other mice, which allows me to make broader conclusions. I guess also in cell culture experiments people don’t take a new batch for each experimental condition. They divide the batch into groups and then repeat the experiment with another batch. Then compare the results from different batches. That is/was a bit confusing. There are different depths in an experiment, but I guess everything depends on the question you are asking. If I am interested in mouse weight, then each mouse is my sample or actually replicate. If I am interested in the cells then each experimental group with the cells becomes my sample. (I am not sure but maybe the most ideal would be treating cells from each mice with just one treatment, so that each cell population are independent from each other (like new batch of cells for each treatment). But then it would result in animal massacre and that does not make sense at all.)</p>
-<p>Anyway in the figures 6 and 7, I say that if I take 4 mice and calculate the mean of the parameter of interest and repeat this 3 times, then the sd of these means are actually SEM estimation from single sampling. In other words if I measured the weights from 4 different mice, I can calculate the SEM via dividing sd of my measurements to square root of 4(n). If I repeated this experiment many more times, sd of the mean of each repeat would be the SEM I calculated earlier. The problem is, below I claimed that if we have replicates we can calculate the SEM by directly taking the sd of the replicate means, we don’t need to estimate it since we have replicates. But I was confused about the term of “biological replicates.” In theory if you are interested in the mean weight differences in different experimental conditions, each mice you use is a biological replicate. So when you compare 12 control mice to 12 treated mice you have sample size of 12. One would not repeat this experiment with more groups of 24 mice to get a mean from each of them to compare the effect of control vs treatment conditions. A different lab may repeat this experiment with 24 mice and then comparing these two experiments would be a question of reproduciblity (like meta analysis). In that case we would have sample size of 2 I think, and we would go one step deeper. So in reality we never calculate SEM from replicate standard deviations. We don’t need to. If we had 12 mice we wouldn’t use 6 of them to do the experiment and then use the other 6 to repeat it, we would use all 12 mice and keep our sample size high.</p>
+<p>Anyway in the figures 6 and 7, I say that if I take 4 mice and calculate the mean of the parameter of interest and repeat this 3 times, then the sd of these means are actually SEM estimation from single sampling. In other words if I measured the weights from 4 different mice, I can calculate the SEM via dividing sd of my measurements to square root of 4(n). If I repeated this experiment many more times, sd of the mean of each repeat would be the SEM I calculated earlier. The problem is, below I claimed that if we have replicates we can calculate the SEM by directly taking the sd of the replicate means, we don’t need to estimate it since we have replicates. But I was confused about the term of “biological replicates”. In theory if you are interested in the mean weight differences in different experimental conditions, each mice you use is a biological replicate. So when you compare 12 control mice to 12 treated mice you have sample size of 12. One would not repeat this experiment with more groups of 24 mice to get a mean from each of them to compare the effect of control vs treatment conditions. A different lab may repeat this experiment with 24 mice and then comparing these two experiments would be a question of reproduciblity (like meta analysis). In that case we would have sample size of 2 I think, and we would go one step deeper. So in reality we never calculate SEM from replicate standard deviations. We don’t need to. If we had 12 mice we wouldn’t use 6 of them to do the experiment and then use the other 6 to repeat it, we would use all 12 mice and keep our sample size high.</p>
 <p>I also wanted to compare different ways of estimating SEM as I write this. I took samples with the size of (n=3, 10, 30) from a population (σ = 20, size = 100000). Then I calculated the sd of sampling means(SEM) with 3 different methods:</p>
 <ol type="1">
 <li><span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span></li>
@@ -2243,7 +2280,7 @@ Figure 3: Population and Sample Parameters
 <p>In another words, imagine that we sample 30 people randomly and record the mean height. Then repeat this couple of times so that we have several means. Distribution of these sampling means would follow a normal distribution with the mean <span class="math inline">\(μ_X\)</span> and with sd <span class="math inline">\(\frac{\sigma_X}{\sqrt{30}}\)</span>.</p>
 <p>Note that <span class="math inline">\(\frac{\sigma_X}{\sqrt{N}}\)</span> is also famously known as Standard Error of the Mean (SEM).</p>
 <h3 id="what-is-sem-actually">What is SEM actually?</h3>
-<p>Standard Error of the Mean.. What a confusing name… But apparently this was not the case before. This is actually it is nick name it seems. Its full name is <strong>“The estimated standard deviation of the sampling distribution of x-bar”</strong> according to <a href="https://stats.stackexchange.com/questions/60484/why-is-the-formula-for-standard-error-the-way-it-is">this discussion</a>. Which is longer but more explanatory. As it suggests, SEM is just the standard deviation of the means(<span class="math inline">\(\bar{X}\)</span>) of your samples. So you took four measurements and calculated mean of it, repeated this 10 times. You get 10 means, standard deviation of these means is SEM.</p>
+<p>Standard Error of the Mean.. What a confusing name… But apparently this was not the case before. This is actually its nick name it seems. Its full name is <strong>“The estimated standard deviation of the sampling distribution of x-bar”</strong> according to <a href="https://stats.stackexchange.com/questions/60484/why-is-the-formula-for-standard-error-the-way-it-is">this discussion</a>. Which is longer but more explanatory. As it suggests, SEM is just the standard deviation of the means(<span class="math inline">\(\bar{X}\)</span>) of your samples. So you took four measurements and calculated mean of it, repeated this 10 times. You get 10 means, standard deviation of these means is SEM.</p>
 <aside>
 <p>Ona sadece iş arkadaşları SEM der.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2279,7 +2316,7 @@ Figure 5: Sample size differences illustration
 <p>I would like to touch on a few points which always confused me. I think I finally got it. :)</p>
 <h3 id="sample-size-vs-replicates">Sample size vs Replicates</h3>
 <p>I think sometimes it gets quite confusing to understand what the sample size is, at least for me.. If we look at the following figure, on the left side I took 4 samples. Let’s say I took 4 mice and measured their weight and that is it. In this case I have a sample size of 4 and I only performed 1 trial/replicate. On the right side I took 4 mice again but repeated this 5 times in total. Here my sample size is 4 again and I just replicated it 5 times.</p>
-<p>On the right bottom I also illustrated that as we do more replicates we would expect these sampling means from each replicate to form a normal distribution. Higher our sample size is, more it resembles a normal distribution according to CLT. In statistics they say minimum sample size should be 30 as a rule of thumb, but as we also seen in the simulation, sample size of 10 was also reasonably good. As far as I read this rule of thumb depends mostly on the distribution of the population. <strong>Some confusing addition to this topic:</strong> Furthermore, as we do a statistic test we divide mean differences with estimated standard deviation. With this additional division, sample size starts to matter more apparently.<span class="citation" data-cites="dals"><sup>[<a href="#ref-dals" role="doc-biblioref">1</a>]</sup></span> See the <a href="https://bstats.netlify.app/posts/2021-11-27-inference/">next post</a> about this.</p>
+<p>On the right bottom I also illustrated that as we do more replicates we would expect these sampling means from each replicate to form a normal distribution. Higher our sample size is, more it resembles a normal distribution according to CLT. In statistics they say minimum sample size should be 30 as a rule of thumb, but as we also seen in the simulation, sample size of 10 was also reasonably good. As far as I read this rule of thumb depends mostly on the distribution of the population. <strong>Some confusing addition to this topic:</strong> Furthermore, as we do a statistic test we divide mean differences with estimated standard deviation. With this additional division, sample size starts to matter more apparently<span class="citation" data-cites="dals"><sup>[<a href="#ref-dals" role="doc-biblioref">1</a>]</sup></span>. See the <a href="https://bstats.netlify.app/posts/2021-11-27-inference/">next post</a> about this.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
 <img src="images/Sampling.png" alt="Sampling" width="636" />
@@ -2290,7 +2327,8 @@ Figure 6: Sampling
 </div>
 <h3 id="how-to-calculate-sem-in-practice">How to calculate SEM in practice?</h3>
 <p>The thing that confused me a lot is how to calculate the SEM in practice, especially when you have or don’t have replicates. In the next figure, on the left we measured weights of 4 mice again. According to <span class="math inline">\(SEM = \frac{\sigma_X}{\sqrt{N}}\)</span> we can get SEM. But since we don’t have data from billions of mice that live in the world, we don’t know the population standard deviation (σ). Good thing is we have sample sd (<span class="math inline">\(s_X\)</span>) that we can use as estimate of σ. Sample standard deviation is calculated a little bit differently than population sd:<br />
-<span class="math display">\[s_X = \sqrt{\frac{(X_i - \bar{X})^2 }{N - 1}}\]</span> We use sample mean and at denominator we have N-1 instead of N. This is simply because, when we estimate σ from sample sd we tend to underestimate it. Thus we boost it up by dividing with a smaller number. There is also a more logical explanations about this, which I can discuss later.</p>
+<span class="math display">\[s_X = \sqrt{\frac{(X_i - \bar{X})^2 }{N - 1}}\]</span>
+We use sample mean and at denominator we have N-1 instead of N. This is simply because, when we estimate σ from sample sd we tend to underestimate it. Thus we boost it up by dividing with a smaller number. There is also a more logical explanations about this, which I can discuss later.</p>
 <p>So we can calculate the <span class="math inline">\(s_X\)</span> with this formula and calculate the estimate for SEM via <span class="math inline">\(SEM = \frac{s_X}{\sqrt{N}}\)</span>.</p>
 <p><strong>Take the following paragraph and figure with caution. See the notes at the beginning of the post</strong></p>
 <p>What if we have replicates? Then we already calculate mean for each replicate, thus we have more than one mean estimate. Thus one can directly calculate the sd of these means as usual to get the SEM. Which makes sense I think and also according to <a href="https://sisu.ut.ee/measurement/33-standard-deviation-mean">this resource</a>. THUS, as far as I understood when you have replicates you don’t have to do this <span class="math inline">\(\frac{s_X}{\sqrt{N}}\)</span> to get SEM (And I don’t know what to write to the place of <span class="math inline">\(s_X\)</span> to be honest when you have replicates).</p>
@@ -2313,11 +2351,11 @@ Figure 7: Calculation of SEM
   <p class="social_footer">
     <span class="article-sharing">
       Share: &nbsp;
-      <a href="https://twitter.com/share?text=Random%20Variables%2C%20Distributions%20and%20CLT&amp;url=https%3A%2F%2Fbstats.netlify.app%2Fposts%2F2021-11-20-random-variables-and-distributions%2F">
-        <i class="fab fa-twitter"></i>
+      <a href="https://twitter.com/share?text=Random%20Variables%2C%20Distributions%20and%20CLT&amp;url=https%3A%2F%2Fbstats.netlify.app%2Fposts%2F2021-11-20-random-variables-and-distributions%2F" aria-label="share on twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
       </a>
-      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fbstats.netlify.app%2Fposts%2F2021-11-20-random-variables-and-distributions%2F&amp;title=Random%20Variables%2C%20Distributions%20and%20CLT">
-        <i class="fab fa-linkedin"></i>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fbstats.netlify.app%2Fposts%2F2021-11-20-random-variables-and-distributions%2F&amp;title=Random%20Variables%2C%20Distributions%20and%20CLT" aria-label="share on linkedin">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
       </a>
     </span>
   </p>
