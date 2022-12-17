@@ -1,14 +1,20 @@
 ---
 title: "Confidence Intervals"
 description: |
-  A short description of the post.
+  Importance of reporting confidence intervals and effect size. Why and how confidence intervals relate to the P values.
 author:
-  - name: Batuhan AkÃ§abozan
+  - name: Batuhan Akçabozan
     url: {}
-date: 2021-12-18
+date: 2022-12-17
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
+    toc_depth: 3
+bibliography: ../../references.bib 
+csl: ../../apa.csl
+editor_options: 
+  chunk_output_type: console    
 ---
 
 
@@ -46,6 +52,20 @@ So as the definition stated: *With probability of 95%, our interval would includ
 knitr::include_graphics("images/ci.png")
 ```
 
-If we had used the CLT with low sample size instead of 30 for example, then CLT would not be accurate since our samplings would deviate from normal distribution and our estimate of 95% CI would include the population parameter less than 95% of the time. In this case we would normally use t-test. So if we were to calculate the 95% area according to the t distribution we would get an accurate 95% CI.
+If we had used the CLT with low sample size instead of 30 for example, then CLT would not be accurate since our samplings would deviate from normal distribution and our estimate of 95% CI would include the population parameter less than 95% of the time. In this case we would normally use t-test. T distribution has larger tails so using it will give us a bigger 95% CI, because now the null distribution will cover a larger area to encapsulate the 95% of the area. So in the end if we were to calculate the 95% area according to the t distribution we would get an accurate 95% CI.
 
+## Confidence Intervals and p-values
+
+Let's say you are interested in two mean differences. $\bar{X} - \bar{Y}$. Let's call this difference *d*. Suppose we calculate a 95% CI for this difference *d* according to the t-distribution and we get:
+
+$$
+d - \frac{2sd_d}{\sqrt{N}} < 0 < d + \frac{2sd_d}{\sqrt{N}}
+$$
+
+If this interval fails to include the the 0, then it would mean either the lower bound is bigger than 0 or the upper bound is smaller than 0. $d - \frac{2sd_X}{\sqrt{N}} > 0$ and $d + \frac{2sd_X}{\sqrt{N}} < 0$ respectively. If we arrange the equation, this would also mean $\frac{d}{\frac{sd_d}{\sqrt{N}}} > 2$ or $\frac{d}{\frac{sd_d}{\sqrt{N}}} < 2$. Considering that $d = \bar{X} - \bar{Y}$,  $\frac{\bar{X} - \bar{Y}}{\frac{sd_d}{\sqrt{N}}}$ is the t-test statistic (t value). Coincidentally when the t-test statistic is bigger than 2 (arbitrary here) it also means $p < 0.05$. Likewise if we calculated 99% CI, we would get a result like: $t > constant$ where a t value bigger than this constant would indicate $p < 0.01$ in a t value table.
+
+In the next post I will look into power calculations.
+
+
+*Fun fact: I started writing this post exactly one year ago and then I stopped. I looked at it and finished only now...*
 

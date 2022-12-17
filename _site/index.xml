@@ -7,7 +7,16 @@
     <description>bblog
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 27 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Confidence Intervals</title>
+      <dc:creator>Batuhan Akçabozan</dc:creator>
+      <link>https://bstats.netlify.app/posts/2021-12-18-confidence-intervals</link>
+      <description>Importance of reporting confidence intervals and effect size. Why and how confidence intervals relate to the P values.</description>
+      <guid>https://bstats.netlify.app/posts/2021-12-18-confidence-intervals</guid>
+      <pubDate>Fri, 16 Dec 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://bstats.netlify.app/posts/2021-12-18-confidence-intervals/images/ci.png" medium="image" type="image/png" width="1061" height="677"/>
+    </item>
     <item>
       <title>Random variable Characteristics, Statistical Inference &amp; t-test</title>
       <dc:creator>Batuhan Akçabozan</dc:creator>
@@ -23,7 +32,7 @@
       <link>https://bstats.netlify.app/posts/2021-11-20-random-variables-and-distributions</link>
       <description>We talk about CLT, sample size and SEM</description>
       <guid>https://bstats.netlify.app/posts/2021-11-20-random-variables-and-distributions</guid>
-      <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 20 Nov 2021 00:00:00 +0000</pubDate>
       <media:content url="https://bstats.netlify.app/posts/2021-11-20-random-variables-and-distributions/images/Ps_mean.png" medium="image" type="image/png" width="1022" height="781"/>
     </item>
     <item>
