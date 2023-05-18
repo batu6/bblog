@@ -7,14 +7,22 @@
     <description>bblog
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 16 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Apr 2023 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Japonca</title>
+      <dc:creator>Batuhan Akçabozan</dc:creator>
+      <link>https://bstats.netlify.app/posts/2023-04-23-japonca</link>
+      <description>Japonca yolculuğuna giriş</description>
+      <guid>https://bstats.netlify.app/posts/2023-04-23-japonca</guid>
+      <pubDate>Sat, 22 Apr 2023 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Confidence Intervals</title>
       <dc:creator>Batuhan Akçabozan</dc:creator>
       <link>https://bstats.netlify.app/posts/2021-12-18-confidence-intervals</link>
       <description>Importance of reporting confidence intervals and effect size. Why and how confidence intervals relate to the P values.</description>
       <guid>https://bstats.netlify.app/posts/2021-12-18-confidence-intervals</guid>
-      <pubDate>Fri, 16 Dec 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 17 Dec 2022 00:00:00 +0000</pubDate>
       <media:content url="https://bstats.netlify.app/posts/2021-12-18-confidence-intervals/images/ci.png" medium="image" type="image/png" width="1061" height="677"/>
     </item>
     <item>
