@@ -1,0 +1,70 @@
+---
+title: "Japonca"
+description: |
+  Japonca yolculuğuna giriş
+author:
+  - name: Batuhan Akçabozan
+    url: {}
+date: 2023-04-23
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Giriş
+
+Yıllarca o ya da bu sebepten askıya alınmış onca Japonca öğrenme hevesinden sonra, şimdi Japonca'ya gerçekten zaman ayırabilirmişim gibi hissediyorum. Hazır bunu hissetmişken, dedim ki bu süreci biraz da kayıt altına alayım. Belki ileride faydalı bir materyale dönüşür. Şu an ne yaptığıma gelmeden önce, cevaplamak istediğim iki önemli soru var. 1: *"Neden Japonca?"* 2: *"Bu zamana kadar neler öğrendim?"*. Öyleyse başlayalım!
+
+# Neden Japonca?
+
+Bir dil öğrenmenin en temel sorusu: "Neden?". En eskiye gidersek, Japonca'nın ve Japonya'nın hayatıma girişini herhalde Barış Manço'nun Japonya konserine borçluyum: "Domates biber nassu nassu"dan "hahahaha ha hapşu, odaijini"ye çok enerjik olan bu konseri unutmak elde değil. Tabii bu sadece bir tanışmaydı; daha küçüktüm ve uzun bir süre boyunca da ingilizce dışında yabancı bir dil ilgimi çekmeyecekti. Benim hayatımın ingilizceye odaklı olduğu uzun dönem boyunca tabii ki Japonca hakkında yer yer bilgiler edinmiştim. Mesela, (çok da kabul görmediğini sonradan öğrensem de) Türkçe ve Japonca'nın aynı dil ailesinden geldiği bilgisi ya da Türkçe ve Japonca'nın  dil bilgisel olarak birbirine benzediği bilgisi. Bu gibi bilgilerin ışığında bir gün mutlaka Japonca öğrenmek istiyordum ama o zamanlar daha bunu nasıl yapacağım hakkında çok bir fikrim yoktu ve yapılacaklar listemde bir kırıntı olarak kaldı uzun bir süre bu düşünce.
+
+Bu düşünce kırıntıları üniversite yıllarımın son yıllarına kadar o listede kaldı. Sonra önce anime mi girdi yoksa hayatıma yoksa Japonca mı emin değilim ama ben Japonca'ya sanırım ilk kez ciddi olarak arkadaşım Klausvonsviç'le birbirimizi indüklememiz sonucunda girdim. Anime izlemeye başlamak Japonca öğrenmeye olan isteğimi oldukça arttırdı tabii ki. Bunun yanında yine o dönemlerde dinlemeye başladığım Japon müzikleri de oldukça ilgimi çekiyordu. Fusion, funk, jazz, rock ve pop gibi tarzlarda çok başarılı müzikler yaptıklarını da keşfettikten sonra artık oldukça fazla sebebim olmuştu bu dili öğrenmek için.
+
+Bunlara ek olarak, Japonca'nın tamamıyla farklı bir(3) alfabeye sahip olması da ilginçti benim için. Tek bir kelimeyle söylemem gerekirse *havalıydı*.
+
+Özetle neden Japonca sorumun cevabı böyle. 
+
+Bu bölümü kapamadan önce "Fast and Furious: Tokyo Drift" filmine ve Kesmeşeker'in "Japonca" adlı şarkısına da teşekkürlerimi sunmak isterim.
+
+# Bu zamana kadar neler öğrendim?
+
+Japonca'yı tekrar öğrenmeye başladığım şu noktada, sıfırdan başlamadığımı belirtmem lazım. Geçen yıllarda yer yer Japonca'yla olan istişarelerimizden biriken az çok bir deneyimim var. Sanırım ilk olarak alfabeyle başlamıştım. Hiragana ve katakanayı öğrenmiştim. Tabii ki ilk seferde oturmadı, ikinci seferde de oturmadı. Unuttum ve tekrar tekrar öğrendim. Arkadaşlarımın isimlerini yazarak pratik yaptığımı hatırlıyorum. Ayrıyetten basit bir manga indirip, anlamasam da diyalogları okumaya çalışmıştım, alfabeyi okumaya alışayım diye.
+
+Bir nokta da yavaş yavaş birkaç kanji de ezberleyeyim diye düşünmüştüm. O yüzden bunun için kaynak arayıp birkaç kitap gözüme kestirmiştim. Bu kitapları takip ederek her gün, her hafta bir iki kelime ve kanjisini öğrensem sonra ileride işimi kolaylaştırır diye düşünmüştüm. Tabii teoride kulağa hoş gelse de pratikte oldukça sıkıcı olduğu için her seferinde başarısızlıkla sonuçlandı bu girişimim. Tabii kanjileri bir bağlam içinde öğrenmeye çalışıyordum ama daha ne kadar japonca biliyordum ki? O bağlamı kurmak için bulduğum cümleler de yeni oluyordu benim için ve bu işimi bayağı uzatıyordu. Neden böyle bir şey yapar ki insan kendisine, akıl alır gibi değil. Bu öğrenme sürecini; kelime ve cümle kalıplarını Anki'ye kaydedip tekrar ederek yapıyordum. Ayrıyetten Goldlist Metodu diye bir yöntemi de denemiştim. Şimdi dönüp baktığımda, sadece Hiragana ve Katakana pratiği açısından işime yaradı galiba bu yaptıklarım.
+
+Dil bilgisi konusunda [Erin](https://www.erin.jpf.go.jp/) diye bir siteyi takip etmeye çalışmıştım bir süre. Şimdi güncellemişler sanırım. Ama dil bilgisi için en sevdiğim kaynak [Asialogy'nin Youtube'daki Japonca dersleriydi](https://www.youtube.com/watch?v=LbfdCvITyUM&list=PLdnIlWN-mtuLTr8aZYEitxUxCBRGn5FQL). Bir noktaya kadar takip edip bırakmıştım maalesef. Bunların dışında **Genki** kitabına başlamaya çalışmıştım ama pek de başlamıştım diyemem.
+
+Genel anlamda ise o kadar anime izlememin dinleme açısından bana bayağı faydasının olduğunu düşünüyorum. Özellikle, izlediğim şeyi bilinçli bir şekilde dinlememin. Bununla kast ettiğim, karakterlerin yer yer kullandığı kalıpları yakalamak. Ne gibi kalıpları ne gibi durumda söylediklerini duya duya bir kulak aşinalığı oluştu kesinlikle. 
+
+Özetle bu "laylaylom Japonca öğreniyorum arada sırada yey" yıllarının sonunda aklımda kalanlar şöyle:
+
+1. Tozlu bir Hiragana ve Katakana.
+2. Neredeyse hiç kanji.
+3. Az ve tozlu bir dil bilgisi.
+4. Oldukça etkili(tartışılır) bir anime kelime haznesi ve kulak yatkınlığı. 
+
+# Planım ne?
+
+Bu sefer önceden yaptığım şeylerden ders çıkararak öncelikle kanji öğrenmeye çalışmayacağım aktif olarak. Fakat sıkça denk geldiğim ve yazımı kolay kanjiler olursa bunları öğrenmeyi düşünüyorum.
+
+Anki, goldlist gibi ezberleme uygulamalarından hep sıkılıyorum o yüzden onlarla şu noktada uğraşmayı düşünmüyorum. 
+
+Genelde bir dil öğrenmeye ilk başlarken bir dil bilgisi egzersiz kitabını takip etmeyi seviyorum. O bilinmez uçsuz bucaksız dil denizinde sakin bir liman oluyor benim için dil bilgisi. Tabii bu limanda sonsuza kadar kalmayı düşünmüyorum. Genki'nin Japonca serisi bayağı ünlü olduğu için ondaki egzersizleri yapmayı düşünüyorum. Fakat Genki'den önce Asialogy'nin Japonca serisini sonunda baştan sona izlemek istiyorum. Türkçe ile karşılaştırarak basit bir şekilde anlattığı için çok önemli bir kaynak olduğunu düşünüyorum. Japonca'da şöyle beni neler beklediği konusunda genel bir fikir edinmek için çok faydalı olur bence.
+
+# Nasıl gidiyor?
+
+Yukarıda da bahsettiğim gibi şimdilik Asialogy'nin videolarına odaklandım. Fakat videoları sadece izleyip geçmiyorum, aynı zamanda notlar da alıyorum. Özetle; bir bölümü izliyorum, izlerken Japonca için ayırdığım bir deftere de dil bilgisi notlarını ve bazı örnek cümleleri yazıyorum. Bu noktada amacım her konuyu derinlemesine oturtmak değil, sadece Japonca'yla tanışmak. Bu yüzden videolarda çok vakit kaybetmiyorum. Gerekli notlarımı alıyorum ve ilerliyorum. İleride egzersizler yaptıkça bu notlarıma danışmanın faydalı olacağını düşünüyorum. 
+
+Şu an videoların yarısından çoğu bitti. İlk başlarda daha motive bir şekilde her gün izliyordum ama bi süre sonra tempom düştü, şu an daha yavaş yavaş ilerliyorum. Ama ilerliyorum, önemli olan da bu.
+
+Onun dışında bir defter tuttuğumdan bahsettim. Bir dil öğrenirken defter tutmanın çok faydalı olduğunu düşünüyorum, özellikle başlangıç aşamalarında. İnsana bir referans noktası veriyor bence ve amaçsızca dil içinde kaybolmasının önüne geçiyor. Benim kişisel deneyimim, dilde ilerledikçe defterden uzaklaşmam şeklindeydi. İtalyanca ve Almanca için bayağıdır bir defter tutmuyordum mesela, fakat geçen aylarda öğrenmek istediğim kelimeleri bir deftere yazmaya başladım. O defteri otobüste giderken açıp notlarımı tekrar etmek oldukça yardımcı oldu. Mutlaka öğrendiğiniz dil için ayrı bir defteriniz olsun.
+
+Şimdilik durum bu. İleride gelişmeler oldukça buraya yazacağım.
