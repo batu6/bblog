@@ -7,14 +7,22 @@
     <description>bblog
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 22 Apr 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 18 Aug 2023 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Japonca 2</title>
+      <dc:creator>Batuhan Akçabozan</dc:creator>
+      <link>https://bstats.netlify.app/posts/2023-08-19-japonca-2</link>
+      <description>Japonca ve diğer öğrendiğim dillerdeki yolculuğumdan bazı gelişmeler</description>
+      <guid>https://bstats.netlify.app/posts/2023-08-19-japonca-2</guid>
+      <pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Japonca</title>
       <dc:creator>Batuhan Akçabozan</dc:creator>
       <link>https://bstats.netlify.app/posts/2023-04-23-japonca</link>
       <description>Japonca yolculuğuna giriş</description>
       <guid>https://bstats.netlify.app/posts/2023-04-23-japonca</guid>
-      <pubDate>Sat, 22 Apr 2023 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 23 Apr 2023 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Confidence Intervals</title>

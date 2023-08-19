@@ -1,0 +1,34 @@
+---
+title: "I've got the Power"
+description: |
+  A short description of the post.
+author:
+  - name: Batuhan AkÃ§abozan
+    url: {}
+date: 2022-12-24
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+As a scientists we set a hypothesis about a phenomenon. Then we design and perform series of experiments to test our hypothesis. Since we don't have access to whole population we *sample* from the population to conclude about the general with the help of statistical theory. Do our results from control group and experimental group differ from each other or they do not? 
+
+In the first posts when I talked about the null distribution, I said that null distribution shows us how probable it is to see a certain value, when there is no difference between the two populations we compare. This probability is of course highest at 0 and it decreases as we go away from 0. When we then put a p-value cutoff of 0.05, what we actually say is that, when there is no difference between two populations we compare the test result (e.g. mean difference) will show us 95% of the time that there is no difference between these population. This is good because we know that there is no difference between these populations. However this also means that there is a 5% chance that we can mistakenly conclude that these populations are different (i.e. the treatment has an effect.). This is a **False Positive** result or a **Type I error**. Indeed the p-value(alpha value) we set is the false positive rate we set for an experiment. It says that 5 out of 100 times we can make false conclusions.
+
+But why don't we decrease our false positive results? Let's put a smaller cutoff 0.001 0.0000001? Then we are pretty much sure that we will not make false claims!! But no. What if there is actually a difference between populations? Then we would falsely claim that there is no difference between them, when in fact there is! This is **False Negative** or a  **Type II error**. Probability that we fail to reject the null hypothesis when in fact the hypothesis was false. 
+
+Unlike Type I error rate, which is rooted to an underlying null distribution that assumes the two populations are same, alternative hypothesis does not specify certain amount of difference. For this reason we need to decide on a minimum difference we want to distinguish to determine type II error rate or power. Power is in fact calculated as 1-Type II error rate, meaning the probability that we reject the null hypothesis when the null hypothesis was also false (**A true positive**). 
+
+pvalue - alternative does not make sense
+large enough samples you can detect even smallest differences
+what does power depend on.
+
+-- mean difference divided by sd talk
+
+graph representations in nature stats is good.
+
